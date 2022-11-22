@@ -1,0 +1,26 @@
+version: '3.1'
+
+services:
+  kali:
+    image: zachfotis/kali-linux:headless
+    container_name: kali-linux
+    volumes:
+      - kali-data:/root
+    networks:
+      - pen-test
+    tty: true
+    stdin_open: true
+
+  metasploitable2:
+    image: tleemcjr/metasploitable2
+    container_name: metasploitable2
+    command: sh -c "/bin/services.sh && bash"
+    networks:
+      - pen-test
+
+volumes:
+  kali-data:
+
+networks:
+  pen-test:
+    driver: bridge
